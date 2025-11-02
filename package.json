@@ -23,6 +23,7 @@
   "scripts": {
     "test": "npx playwright test",
     "ci": "npx playwright test --reporter=line",
+    "actions": "npx playwright test --reporter=line",
     "show-report": "npx playwright show-report",
     "clean": "rimraf playwright-report test-results artifacts .auth",
     "format": "prettier --write \"**/**.[jt]s?(x)\"",
