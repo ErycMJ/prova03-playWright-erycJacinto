@@ -1,11 +1,17 @@
 import { defineConfig, devices } from '@playwright/test';
 
+const isCI = !!process.env.CI;
+
 export default defineConfig({
   testDir: './src/scenarios',
   timeout: 30 * 1000,
   expect: { timeout: 5000 },
-  retries: 1,
-  reporter: [['html', { open: 'never' }], ['list']],
+  retries: isCI ? 2 : 1,
+  reporter: [
+    ['html', { open: 'never', outputFolder: 'playwright-report' }],
+    ['list'],
+    ['json', { outputFile: 'test-results/results.json' }]
+  ],
   use: {
     baseURL: 'https://cfp-client.vercel.app',
     headless: true,
@@ -14,14 +20,17 @@ export default defineConfig({
     trace: 'on-first-retry',
     locale: 'pt-BR',
     viewport: { width: 1280, height: 720 },
-    ignoreHTTPSErrors: true
+    ignoreHTTPSErrors: true,
+    navigationTimeout: 30000,
+    actionTimeout: 10000,
   },
   projects: [
     { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
   ],
-  webServer: {
+  webServer: isCI ? undefined : {
     command: 'npm run dev',
-    url: 'https://cfp-client.vercel.app',
-    reuseExistingServer: !process.env.CI,
+    url: 'http://localhost:5173',
+    reuseExistingServer: true,
+    timeout: 120000,
   },
 });

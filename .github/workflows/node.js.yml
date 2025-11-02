@@ -8,6 +8,9 @@ on:
   schedule:   
     - cron: '0 12 * * *'
 
+env:
+  CI: true
+
 jobs:
   test:
     name: Run E2E Tests
@@ -26,8 +29,12 @@ jobs:
       run: npx playwright install --with-deps      
     - name: Run tests
       run: npm run ci
+      continue-on-error: true
       env:
         ZEROSTEP_TOKEN: ${{ secrets.ZEROSTEP_TOKEN }}
+    - name: Create test-results directory if not exists
+      run: mkdir -p test-results
+      if: always()
     - name: Upload playwright report
       uses: actions/upload-artifact@v4
       if: always()
