@@ -16,19 +16,19 @@
   "dependencies": {
     "@faker-js/faker": "^9.9.0",
     "@playwright/test": "1.56.1",
+    "nvm": "^0.0.4",
     "playwright": "1.56.1",
     "sicolo": "^1.0.1"
   },
   "scripts": {
-    "clean": "rimraf ./artifacts && mkdirp ./artifacts",
+    "test": "npx playwright test",
+    "ci": "npx playwright test --reporter=line",
+    "show-report": "npx playwright show-report",
+    "clean": "rimraf playwright-report test-results artifacts .auth",
     "format": "prettier --write \"**/**.[jt]s?(x)\"",
     "verify": "prettier --check \"**/**.[jt]s?(x)\"",
-    "scenario": "npx playwright test src/scenarios/ContatoEmpresa.spec.ts --output artifacts/media --workers 1",
-    "test": "npx playwright test --output artifacts/media --workers 4",
-    "debug": "npx playwright test --output artifacts/media --debug --workers 1",
-    "ui": "npx playwright test --output artifacts/media --ui --workers 1",
-    "show-report": "npx playwright show-report artifacts/report",
-    "actions": "npx playwright test --output artifacts/media --workers 1",
-    "ci": "npm run clean && npm run format && npm run verify && npm run test"
+    "debug": "npx playwright test --debug --workers 1",
+    "ui": "npx playwright test --ui --workers 1",
+    "scenario": "npx playwright test src/scenarios/ContatoEmpresa.spec.ts --workers 1"
   }
 }

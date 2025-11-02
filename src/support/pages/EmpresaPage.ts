@@ -1,9 +1,9 @@
 import { Page, expect } from '@playwright/test';
 import { faker } from '@faker-js/faker';
-import EmpresaElements from '../elements/EmpresaElements';
-import BasePage from './BasePage';
+import { EmpresaElements } from '../elements/EmpresaElements';
+import { BasePage } from './BasePage';
 
-export default class EmpresaPage extends BasePage {
+export class EmpresaPage extends BasePage {
   readonly empresaElements: EmpresaElements;
 
   constructor(readonly page: Page) {

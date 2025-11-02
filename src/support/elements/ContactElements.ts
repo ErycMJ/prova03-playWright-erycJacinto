@@ -1,7 +1,7 @@
 import { Locator, Page } from '@playwright/test';
-import BaseElements from './BaseElements';
+import { BaseElements } from './BaseElements';
 
-export default class ContactElements extends BaseElements {
+export class ContactElements extends BaseElements {
   constructor(readonly page: Page) {
     super(page);
     this.page = page;

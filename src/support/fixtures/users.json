@@ -1,0 +1,29 @@
+{
+  "validUser": {
+    "email": "valid@example.com",
+    "password": "123456"
+  },
+  "invalidUser": {
+    "email": "fake@user.com",
+    "password": "wrongpass"
+  },
+  "testUsers": [
+    {
+      "name": "User Admin",
+      "email": "admin@cfp.com",
+      "password": "Admin@123456",
+      "role": "admin"
+    },
+    {
+      "name": "User Regular",
+      "email": "user@cfp.com",
+      "password": "User@123456",
+      "role": "user"
+    }
+  ],
+  "config": {
+    "baseUrl": "https://cfp-client.vercel.app",
+    "timeout": 30000,
+    "retries": 1
+  }
+}

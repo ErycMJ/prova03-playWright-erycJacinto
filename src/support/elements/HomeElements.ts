@@ -1,33 +1,25 @@
-import { Locator, Page } from '@playwright/test';
-import BaseElements from './BaseElements';
+export const homeElements = {
+  navbar: 'nav',
+  navLogo: 'nav a[href="/"]',
+  signInLink: 'a[href*="signin"]',
+  signUpLink: 'a[href*="signup"]',
 
-export default class HomeElements extends BaseElements {
-  constructor(readonly page: Page) {
-    super(page);
-    this.page = page;
-  }
+  heroTitle: 'h1',
+  heroDescription: 'p',
+  heroButton: 'button:first-of-type',
 
-  getSearchField(): Locator {
-    return this.page.locator('#search_query_top');
-  }
+  featuresSection: 'section',
+  featureCards: 'div[className*="feature"]',
 
-  getSearchButton(): Locator {
-    return this.page.locator('button[name="submit_search"]');
-  }
+  ctaSection: 'section[className*="cta"]',
+  ctaButton: 'button',
 
-  getProductCount(): Locator {
-    return this.page.locator('span[class="heading-counter"]');
-  }
+  faqSection: 'section[className*="faq"]',
+  faqItems: 'div[className*="faq-item"]',
 
-  getLoginField(): Locator {
-    return this.page.locator('#user-name');
-  }
+  testimonialsSection: 'section[className*="testimonial"]',
+  testimonialCards: 'div[className*="testimonial"]',
 
-  getPassField(): Locator {
-    return this.page.locator('#password');
-  }
-
-  getSubmitButton(): Locator {
-    return this.page.locator('#login-button');
-  }
-}
+  footer: 'footer',
+  footerLinks: 'footer a'
+};

@@ -1,9 +1,9 @@
 import { Page, expect } from '@playwright/test';
 import { faker } from '@faker-js/faker';
-import CadastroElements from '../elements/CadastroElements';
-import BasePage from './BasePage';
+import { CadastroElements } from '../elements/CadastroElements';
+import { BasePage } from './BasePage';
 
-export default class CadastroPage extends BasePage {
+export class CadastroPage extends BasePage {
   readonly cadastroElements: CadastroElements;
 
   constructor(readonly page: Page) {

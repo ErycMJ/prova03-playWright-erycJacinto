@@ -1,28 +1,53 @@
 import { Page, expect } from '@playwright/test';
-import HomeElements from '../elements/HomeElements';
-import BasePage from './BasePage';
+import { BasePage } from './BasePage';
+import { homeElements } from '../elements/HomeElements';
 
-export default class HomePage extends BasePage {
-  readonly homeElements: HomeElements;
-
-  constructor(readonly page: Page) {
+export class HomePage extends BasePage {
+  constructor(page: Page) {
     super(page);
-    this.page = page;
-    this.homeElements = new HomeElements(page);
   }
 
-  async searchProductByName(): Promise<void> {
-    await this.homeElements.getSearchField().fill('t-shirts');
-    await this.homeElements.getSearchButton().click();
+  async goto() {
+    await this.page.goto('/');
+    await this.page.waitForLoadState('networkidle');
   }
 
-  async checkProductCount(): Promise<void> {
-    await expect(this.homeElements.getProductCount()).toBeVisible();
+  async verifyHomePageVisible() {
+    await this.verifyElementVisible(homeElements.navbar);
+    await this.verifyElementVisible(homeElements.heroTitle);
   }
 
-  async login(): Promise<void> {
-    await this.homeElements.getLoginField().fill('standard_user');
-    await this.homeElements.getPassField().fill('secret_sauce');
-    await this.homeElements.getSubmitButton().click();
+  async verifyNavbarVisible() {
+    await this.verifyElementVisible(homeElements.navbar);
+  }
+
+  async verifySignInButtonVisible() {
+    await this.verifyElementVisible(homeElements.signInButton);
+  }
+
+  async verifyCTAButtonVisible() {
+    await this.verifyElementVisible(homeElements.ctaButton);
+  }
+
+  async clickSignInButton() {
+    await this.page.click(homeElements.signInButton);
+    await this.page.waitForLoadState('networkidle');
+  }
+
+  async clickCTAButton() {
+    await this.page.click(homeElements.ctaButton);
+    await this.page.waitForLoadState('networkidle');
+  }
+
+  async verifyFeaturesSection() {
+    await this.verifyElementVisible(homeElements.featuresSection);
+  }
+
+  async verifyTestimonialsSection() {
+    await this.verifyElementVisible(homeElements.testimonials);
+  }
+
+  async verifyFooterVisible() {
+    await this.verifyElementVisible(homeElements.footer);
   }
 }

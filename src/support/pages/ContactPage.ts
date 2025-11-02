@@ -1,8 +1,8 @@
 import { Page, expect } from '@playwright/test';
-import ContactElements from '../elements/ContactElements';
-import BasePage from './BasePage';
+import { ContactElements } from '../elements/ContactElements';
+import { BasePage } from './BasePage';
 
-export default class ContactPage extends BasePage {
+export class ContactPage extends BasePage {
   readonly contactElements: ContactElements;
 
   constructor(readonly page: Page) {

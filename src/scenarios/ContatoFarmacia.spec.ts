@@ -1,7 +1,7 @@
 import { test } from '@playwright/test';
 import { join } from 'path';
 import { TheConfig } from 'sicolo';
-import FarmaciaPage from '../support/pages/FarmaciaPage';
+import { FarmaciaPage } from '../support/pages/FarmaciaPage';
 
 test.describe.skip('Testes funcionais no site da Trier Sistemas', () => {
   const CONFIG = join(__dirname, '../support/fixtures/config.yml');
