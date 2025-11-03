@@ -4,7 +4,7 @@ const isCI = !!process.env.CI;
 
 export default defineConfig({
   testDir: './src/scenarios',
-  timeout: 60 * 1000, // 1 minuto por teste
+  timeout: 60 * 1000,
   expect: { timeout: 15000 },
   retries: 1,
   reporter: [
@@ -13,7 +13,7 @@ export default defineConfig({
     ['json', { outputFile: 'test-results/results.json' }]
   ],
   fullyParallel: false,
-  workers: 2, // 2 workers para paralelismo
+  workers: 2,
   use: {
     baseURL: 'https://cfp-client.vercel.app',
     headless: true,
