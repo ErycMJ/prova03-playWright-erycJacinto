@@ -4,16 +4,16 @@ const isCI = !!process.env.CI;
 
 export default defineConfig({
   testDir: './src/scenarios',
-  timeout: 90 * 1000,
-  expect: { timeout: 15000 },
-  retries: isCI ? 2 : 1,
+  timeout: 60 * 1000,
+  expect: { timeout: 10000 },
+  retries: isCI ? 1 : 1,
   reporter: [
     ['html', { open: 'never', outputFolder: 'playwright-report' }],
     ['list'],
     ['json', { outputFile: 'test-results/results.json' }]
   ],
   fullyParallel: false,
-  workers: isCI ? 1 : 4,
+  workers: isCI ? 2 : 4,
   use: {
     baseURL: 'https://cfp-client.vercel.app',
     headless: true,
@@ -23,8 +23,8 @@ export default defineConfig({
     locale: 'pt-BR',
     viewport: { width: 1280, height: 720 },
     ignoreHTTPSErrors: true,
-    navigationTimeout: 90000,
-    actionTimeout: 45000,
+    navigationTimeout: 45000,
+    actionTimeout: 30000,
   },
   projects: [
     { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
