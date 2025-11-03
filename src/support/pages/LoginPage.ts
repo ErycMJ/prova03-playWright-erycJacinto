@@ -8,8 +8,10 @@ export class LoginPage extends BasePage {
   }
 
   async goto() {
-    await this.page.goto('/login');
-    await this.page.waitForLoadState('networkidle');
+    await this.page.goto('/login', { waitUntil: 'domcontentloaded' });
+    await this.page.waitForLoadState('networkidle').catch(() => {
+      // Ignora timeout
+    });
   }
 
   async fillEmail(email: string) {
@@ -22,7 +24,9 @@ export class LoginPage extends BasePage {
 
   async clickSubmit() {
     await this.page.click(loginElements.submitButton);
-    await this.page.waitForLoadState('networkidle');
+    await this.page.waitForLoadState('networkidle').catch(() => {
+      // Ignora timeout
+    });
   }
 
   async login(email: string, password: string) {

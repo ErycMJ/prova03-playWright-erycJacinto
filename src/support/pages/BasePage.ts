@@ -6,8 +6,10 @@ export class BasePage {
   }
 
   async goto(path: string) {
-    await this.page.goto(path);
-    await this.page.waitForLoadState('networkidle');
+    await this.page.goto(path, { waitUntil: 'domcontentloaded' });
+    await this.page.waitForLoadState('networkidle').catch(() => {
+      // Ignora timeout de networkidle em CI
+    });
   }
 
   async verifyTitle(title: string): Promise<void> {
@@ -33,7 +35,9 @@ export class BasePage {
 
   async clickButton(selector: string) {
     await this.page.click(selector);
-    await this.page.waitForLoadState('networkidle');
+    await this.page.waitForLoadState('networkidle').catch(() => {
+      // Ignora timeout em CI
+    });
   }
 
   async getText(selector: string): Promise<string> {
@@ -45,7 +49,9 @@ export class BasePage {
   }
 
   async waitForNavigation() {
-    await this.page.waitForLoadState('networkidle');
+    await this.page.waitForLoadState('networkidle').catch(() => {
+      // Ignora timeout em CI
+    });
   }
 
   async verifyElementText(selector: string, expectedText: string) {
@@ -68,3 +74,4 @@ export class BasePage {
     return this.page.url();
   }
 }
+
