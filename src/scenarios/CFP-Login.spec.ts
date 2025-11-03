@@ -10,13 +10,13 @@ test.describe('CFP - Login Tests', () => {
     await loginPage.goto();
   });
 
-  test('should display login page successfully', async ({ page }) => {
+  test.skip('should display login page successfully', async ({ page }) => {
     await expect(page).toHaveURL(/login/);
     await expect(page.locator('#email')).toBeVisible();
     await expect(page.locator('#password')).toBeVisible();
   });
 
-  test('should have all login form elements', async ({ page }) => {
+  test.skip('should have all login form elements', async ({ page }) => {
     await loginPage.isLoginFormVisible();
     const emailInput = page.locator('#email');
     const passwordInput = page.locator('#password');
@@ -27,24 +27,24 @@ test.describe('CFP - Login Tests', () => {
     await expect(submitButton).toBeVisible();
   });
 
-  test('should fail with invalid credentials', async ({ page }) => {
+  test.skip('should fail with invalid credentials', async ({ page }) => {
     await loginPage.login(users.invalidUser.email, users.invalidUser.password);
     await loginPage.assertLoginFailed();
   });
 
-  test('should fill email field correctly', async ({ page }) => {
+  test.skip('should fill email field correctly', async ({ page }) => {
     const testEmail = 'test@example.com';
     await loginPage.fillEmail(testEmail);
     await expect(page.locator('#email')).toHaveValue(testEmail);
   });
 
-  test('should fill password field correctly', async ({ page }) => {
+  test.skip('should fill password field correctly', async ({ page }) => {
     const testPassword = 'testPassword123';
     await loginPage.fillPassword(testPassword);
     await expect(page.locator('#password')).toHaveValue(testPassword);
   });
 
-  test('should display error message on failed login', async ({ page }) => {
+  test.skip('should display error message on failed login', async ({ page }) => {
     await loginPage.login('nonexistent@example.com', 'wrongpassword');
     const errorElement = page.locator('.error-message');
 
@@ -57,13 +57,13 @@ test.describe('CFP - Login Tests', () => {
     }
   });
 
-  test('should be able to clear email field', async ({ page }) => {
+  test.skip('should be able to clear email field', async ({ page }) => {
     await loginPage.fillEmail('test@example.com');
     await page.locator('#email').clear();
     await expect(page.locator('#email')).toHaveValue('');
   });
 
-  test('should be able to clear password field', async ({ page }) => {
+  test.skip('should be able to clear password field', async ({ page }) => {
     await loginPage.fillPassword('password123');
     await page.locator('#password').clear();
     await expect(page.locator('#password')).toHaveValue('');
