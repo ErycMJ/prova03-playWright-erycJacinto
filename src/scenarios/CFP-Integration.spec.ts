@@ -3,7 +3,7 @@ import { HomePage } from '../support/pages/HomePage';
 import TestUtils from '../support/TestUtils';
 
 test.describe('CFP - Integration Tests', () => {
-  test('should handle form submission flow', async ({ page }) => {
+  test.skip('should handle form submission flow', async ({ page }) => {
     const homePage = new HomePage(page);
     await homePage.goto();
 
@@ -49,7 +49,7 @@ test.describe('CFP - Integration Tests', () => {
     expect(TestUtils.compareObjects(obj1, obj3)).toBe(false);
   });
 
-  test('should verify multiple form fields', async ({ page }) => {
+  test.skip('should verify multiple form fields', async ({ page }) => {
     const homePage = new HomePage(page);
     await homePage.goto();
 

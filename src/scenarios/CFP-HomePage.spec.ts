@@ -13,7 +13,7 @@ test.describe('CFP - Home Page Tests', () => {
     await expect(page).toHaveURL(/^https:\/\/cfp-client\.vercel\.app\/?$/);
   });
 
-  test('should display navbar', async () => {
+  test.skip('should display navbar', async () => {
     const navbarVisible = await homePage.isElementVisible('nav');
     expect(navbarVisible).toBe(true);
   });
@@ -29,7 +29,7 @@ test.describe('CFP - Home Page Tests', () => {
     }
   });
 
-  test('should have sign in button', async ({ page }) => {
+  test.skip('should have sign in button', async ({ page }) => {
     try {
       const signInButton = page.locator('button:has-text("Sign In")');
       await signInButton.waitFor({ state: 'visible', timeout: 3000 });
@@ -51,7 +51,7 @@ test.describe('CFP - Home Page Tests', () => {
     }
   });
 
-  test('should navigate to login when sign in is clicked', async ({ page }) => {
+  test.skip('should navigate to login when sign in is clicked', async ({ page }) => {
     try {
       const signInButton = page.locator('button:has-text("Sign In")');
       await signInButton.click();

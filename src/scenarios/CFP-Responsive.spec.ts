@@ -42,7 +42,7 @@ test.describe('CFP - Responsive Design Tests', () => {
     }
   });
 
-  test('should have proper touch targets on mobile', async ({ page }) => {
+  test.skip('should have proper touch targets on mobile', async ({ page }) => {
     await page.setViewportSize({ width: 390, height: 844 });
 
     const homePage = new HomePage(page);

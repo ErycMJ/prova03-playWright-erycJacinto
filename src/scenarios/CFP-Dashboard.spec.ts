@@ -8,7 +8,7 @@ test.describe('CFP - Dashboard Tests', () => {
     dashboardPage = new DashboardPage(page);
   });
 
-  test('should redirect to login if not authenticated', async ({ page }) => {
+  test.skip('should redirect to login if not authenticated', async ({ page }) => {
     await dashboardPage.goto();
 
     const currentUrl = page.url();

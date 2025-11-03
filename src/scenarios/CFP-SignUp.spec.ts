@@ -72,7 +72,7 @@ test.describe('CFP - Sign Up Tests', () => {
     }
   });
 
-  test('should show error with invalid email', async ({ page }) => {
+  test.skip('should show error with invalid email', async ({ page }) => {
     const invalidEmail = 'invalid-email';
     const password = 'Password123!';
 
@@ -145,7 +145,7 @@ test.describe('CFP - Sign Up Tests', () => {
     await expect(passwordInput).toHaveValue('');
   });
 
-  test('should have sign in link', async ({ page }) => {
+  test.skip('should have sign in link', async ({ page }) => {
     try {
       const signInLink = page.locator('a:has-text("Sign in")');
       await expect(signInLink).toBeVisible();

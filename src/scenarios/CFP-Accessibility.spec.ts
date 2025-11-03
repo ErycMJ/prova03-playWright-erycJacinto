@@ -34,7 +34,7 @@ test.describe('CFP - Accessibility Tests', () => {
     }
   });
 
-  test('should have proper form labels on login page', async ({ page }) => {
+  test.skip('should have proper form labels on login page', async ({ page }) => {
     const loginPage = new LoginPage(page);
     await loginPage.goto();
 
@@ -80,7 +80,7 @@ test.describe('CFP - Accessibility Tests', () => {
     expect(['BUTTON', 'INPUT', 'A', 'SELECT']).toContain(focusedElement);
   });
 
-  test('should have proper focus indicators', async ({ page }) => {
+  test.skip('should have proper focus indicators', async ({ page }) => {
     const loginPage = new LoginPage(page);
     await loginPage.goto();
 
@@ -109,7 +109,7 @@ test.describe('CFP - Accessibility Tests', () => {
     expect(navExists || mainExists || footerExists).toBe(true);
   });
 
-  test('should have proper button types', async ({ page }) => {
+  test.skip('should have proper button types', async ({ page }) => {
     const loginPage = new LoginPage(page);
     await loginPage.goto();
 

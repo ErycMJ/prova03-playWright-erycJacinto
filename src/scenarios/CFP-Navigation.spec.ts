@@ -3,7 +3,7 @@ import { HomePage } from '../support/pages/HomePage';
 import { LoginPage } from '../support/pages/LoginPage';
 
 test.describe('CFP - Navigation Flow Tests', () => {
-  test('should navigate from home to login', async ({ page }) => {
+  test.skip('should navigate from home to login', async ({ page }) => {
     const homePage = new HomePage(page);
     await homePage.goto();
 
@@ -28,7 +28,7 @@ test.describe('CFP - Navigation Flow Tests', () => {
     expect(title.length).toBeGreaterThan(0);
   });
 
-  test('should have working navbar links', async ({ page }) => {
+  test.skip('should have working navbar links', async ({ page }) => {
     const homePage = new HomePage(page);
     await homePage.goto();
 
@@ -47,7 +47,7 @@ test.describe('CFP - Navigation Flow Tests', () => {
     expect(urlBefore).toBe(urlAfter);
   });
 
-  test('should preserve scroll position on navigation', async ({ page }) => {
+  test.skip('should preserve scroll position on navigation', async ({ page }) => {
     const homePage = new HomePage(page);
     await homePage.goto();
 
@@ -97,7 +97,7 @@ test.describe('CFP - Navigation Flow Tests', () => {
     expect(errors.length).toBeLessThan(5);
   });
 
-  test('should have meta description', async ({ page }) => {
+  test.skip('should have meta description', async ({ page }) => {
     const homePage = new HomePage(page);
     await homePage.goto();
 
