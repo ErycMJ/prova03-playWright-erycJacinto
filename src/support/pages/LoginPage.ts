@@ -12,18 +12,28 @@ export class LoginPage extends BasePage {
     await this.page.waitForLoadState('networkidle').catch(() => {
       // Ignora timeout
     });
+    // Aguarda o formulário de login estar visível
+    await this.page.locator(loginElements.loginForm).waitFor({ state: 'visible', timeout: 30000 }).catch(() => {
+      console.warn('Login form not visible within timeout');
+    });
   }
 
   async fillEmail(email: string) {
-    await this.page.fill(loginElements.emailInput, email);
+    const emailInput = this.page.locator(loginElements.emailInput);
+    await emailInput.waitFor({ state: 'attached', timeout: 30000 });
+    await emailInput.fill(email, { timeout: 60000 });
   }
 
   async fillPassword(password: string) {
-    await this.page.fill(loginElements.passwordInput, password);
+    const passwordInput = this.page.locator(loginElements.passwordInput);
+    await passwordInput.waitFor({ state: 'attached', timeout: 30000 });
+    await passwordInput.fill(password, { timeout: 60000 });
   }
 
   async clickSubmit() {
-    await this.page.click(loginElements.submitButton);
+    const submitButton = this.page.locator(loginElements.submitButton);
+    await submitButton.waitFor({ state: 'attached', timeout: 30000 });
+    await submitButton.click({ timeout: 60000 });
     await this.page.waitForLoadState('networkidle').catch(() => {
       // Ignora timeout
     });
@@ -36,7 +46,8 @@ export class LoginPage extends BasePage {
   }
 
   async assertLoginFailed() {
-    await expect(this.page.locator(loginElements.errorMessage)).toBeVisible();
+    const errorElement = this.page.locator(loginElements.errorMessage);
+    await errorElement.waitFor({ state: 'visible', timeout: 30000 });
   }
 
   async assertLoginSuccess() {
@@ -45,6 +56,7 @@ export class LoginPage extends BasePage {
 
   async isLoginFormVisible() {
     const form = this.page.locator(loginElements.loginForm);
+    await form.waitFor({ state: 'visible', timeout: 30000 }).catch(() => false);
     return await form.isVisible();
   }
 

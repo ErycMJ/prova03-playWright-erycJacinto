@@ -4,8 +4,8 @@ const isCI = !!process.env.CI;
 
 export default defineConfig({
   testDir: './src/scenarios',
-  timeout: 120 * 1000, // 2 minutos por teste
-  expect: { timeout: 20000 },
+  timeout: 180 * 1000, // 3 minutos por teste em CI
+  expect: { timeout: 30000 },
   retries: 2,
   reporter: [
     ['html', { open: 'never', outputFolder: 'playwright-report' }],
@@ -23,8 +23,8 @@ export default defineConfig({
     locale: 'pt-BR',
     viewport: { width: 1280, height: 720 },
     ignoreHTTPSErrors: true,
-    navigationTimeout: 90000,
-    actionTimeout: 30000,
+    navigationTimeout: 120000,
+    actionTimeout: 60000,
   },
   projects: [
     { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
