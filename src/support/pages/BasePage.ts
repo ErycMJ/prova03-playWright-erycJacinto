@@ -7,9 +7,7 @@ export class BasePage {
 
   async goto(path: string) {
     await this.page.goto(path, { waitUntil: 'domcontentloaded' });
-    await this.page.waitForLoadState('networkidle').catch(() => {
-      // Ignora timeout de networkidle em CI
-    });
+    await this.page.waitForLoadState('networkidle').catch(() => {});
   }
 
   async verifyTitle(title: string): Promise<void> {
@@ -20,7 +18,10 @@ export class BasePage {
     await expect(this.page).toHaveURL(url);
   }
 
-  async isElementVisible(selector: string, timeout: number = 5000): Promise<boolean> {
+  async isElementVisible(
+    selector: string,
+    timeout: number = 5000
+  ): Promise<boolean> {
     try {
       await this.page.locator(selector).waitFor({ state: 'visible', timeout });
       return true;
@@ -35,13 +36,11 @@ export class BasePage {
 
   async clickButton(selector: string) {
     await this.page.click(selector);
-    await this.page.waitForLoadState('networkidle').catch(() => {
-      // Ignora timeout em CI
-    });
+    await this.page.waitForLoadState('networkidle').catch(() => {});
   }
 
   async getText(selector: string): Promise<string> {
-    return await this.page.textContent(selector) || '';
+    return (await this.page.textContent(selector)) || '';
   }
 
   async selectOption(selector: string, value: string) {
@@ -49,9 +48,7 @@ export class BasePage {
   }
 
   async waitForNavigation() {
-    await this.page.waitForLoadState('networkidle').catch(() => {
-      // Ignora timeout em CI
-    });
+    await this.page.waitForLoadState('networkidle').catch(() => {});
   }
 
   async verifyElementText(selector: string, expectedText: string) {
@@ -74,4 +71,3 @@ export class BasePage {
     return this.page.url();
   }
 }
-
