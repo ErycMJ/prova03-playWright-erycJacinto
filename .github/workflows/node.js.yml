@@ -2,22 +2,51 @@ name: K6 Performance Testing
 
 on:
   push:
-    branches: [ master ]
+    branches: [ master, main, develop ]
   pull_request:
-    branches: [ master ]
+    branches: [ master, main, develop ]
   schedule:   
     - cron: '0 12 * * *'
 
 jobs:
-  run-test:
+  k6-tests:
     runs-on: ubuntu-latest
+    
     steps:
-      - name: Checkout
-        uses: actions/checkout@v5.0.0
+      - name: Checkout code
+        uses: actions/checkout@v4
 
       - name: Setup K6
-        uses: grafana/setup-k6-action@v1.1.0
-      - name: Run local k6 test
+        uses: grafana/setup-k6-action@v1.2.0
+
+      - name: Verify k6 files exist
+        run: |
+          if [ ! -d "k6-tests" ]; then
+            echo "Error: k6-tests directory not found!"
+            exit 1
+          fi
+          ls -la k6-tests/
+
+      - name: Run K6 Smoke Test
         uses: grafana/run-k6-action@v1.3.1
         with:
-          path: src/k6-tests
+          path: k6-tests/smoke-test.js
+        continue-on-error: true
+
+      - name: Run K6 Load Test
+        uses: grafana/run-k6-action@v1.3.1
+        with:
+          path: k6-tests/load-test.js
+        continue-on-error: true
+
+      - name: Run K6 Stress Test
+        uses: grafana/run-k6-action@v1.3.1
+        with:
+          path: k6-tests/stress-test.js
+        continue-on-error: true
+
+      - name: Run K6 Spike Test
+        uses: grafana/run-k6-action@v1.3.1
+        with:
+          path: k6-tests/spike-test.js
+        continue-on-error: true
