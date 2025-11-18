@@ -4,11 +4,11 @@ import { ENDPOINTS, TEST_DATA } from './config.js';
 
 export const options = {
     stages: [
-        { duration: '2m', target: 10 },
+        { duration: '2m', target: 7  },
         { duration: '5m', target: 10 },
         { duration: '2m', target: 20 },
         { duration: '5m', target: 20 },
-        { duration: '2m', target: 30 },
+        { duration: '2m', target: 92 },
     ],
     thresholds: {
         http_req_duration: ['p(95)<800'],
